@@ -1,7 +1,6 @@
 import cv2
 import sys
 import os
-# import numpy as np
 
 
 def main():
@@ -19,7 +18,7 @@ def main():
         print('Dataset path=\n', argvs[1])
 
     strRootName = argvs[1].split('/')[-2]
-    os.makedirs('concatimagesfrom"' + strRootName + '"', exist_ok=True)
+    os.makedirs('result/autoConcatnateImage/' + strRootName, exist_ok=True)
 
     files = sorted(os.listdir(argvs[1]))
     # print(files)
@@ -40,8 +39,6 @@ def main():
             if cv2.imread(os.path.join(argvs[1], strDirName, strImgName)) is not None:
                 im_list.append(cv2.imread(os.path.join(
                     argvs[1], strDirName, strImgName)))
-                # print(strImgName)
-
         # print(im_list)
 
         width_min = min(im.shape[1] for im in im_list)
@@ -50,8 +47,8 @@ def main():
             im, (width_min, int(im.shape[0] * width_min / im.shape[1]))) for im in im_list]
 
         outputimg = cv2.vconcat(im_list_resize)
-        cv2.imwrite('concatimagesfrom"' + strRootName +
-                    '"/' + strDirName + '.png', outputimg)
+        cv2.imwrite('result/autoConcatnateImage/' + strRootName
+                    + '/' + strDirName + '.png', outputimg)
 
 
 if __name__ == '__main__':
