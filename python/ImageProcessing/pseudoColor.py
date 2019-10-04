@@ -22,10 +22,8 @@ video_input = cv2.VideoCapture(0)
 while True:
     ret, frame = video_input.read()
 
-    # グレースケール化
     grayscale_image = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
 
-    # 疑似カラーを付与
     apply_color_map_image = cv2.applyColorMap(
         grayscale_image, COLORMAP_TABLE[colormap_table_count % len(COLORMAP_TABLE)][1])
 
